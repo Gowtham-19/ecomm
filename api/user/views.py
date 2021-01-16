@@ -7,6 +7,7 @@ from django.contrib.auth import login,logout
 from .models import CustomUser
 from django.http import JsonResponse
 import random
+from json import loads
 import re 
 
 #generating random token
@@ -18,16 +19,18 @@ def generate_session_token(length=10):
 def signin(request):
     if not request.method == 'POST':
         return JsonResponse({'error':'send a post request with valid parameters'})
-    
-    # is_private = request.POST.get('is_private', False)
-    username = request.POST.get('email',False)
-    print("username from postman",username)
-    password = request.POST.get('password',False) 
+    body = loads(request.body)
+    print("the body from post man",body)
+    username = body["email"]
+    password = body['password'] 
     
     #validation part
-    # if not  re.match("([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}/igm",username):
-    #     return JsonResponse({'error':'Enter a valid email'})
+    regex ="^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
+    if not  re.search(regex,username):
+        
+        return JsonResponse({'error':'Enter a valid email'})
     if len(password)<3:
+      
         return JsonResponse({'error':'Passsowrd needs to be at least of 3'})
     
     

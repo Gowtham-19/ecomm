@@ -2,7 +2,7 @@ from django.urls import path,include
 from .import views
 from rest_framework import routers
 router = routers.DefaultRouter()
-# router.register(r'',views.ProductViewSet)
+router.register(r'',views.UserViewSet)
 
 urlpatterns = [
     path('login/',views.signin,name='signin'),

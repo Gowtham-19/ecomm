@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'api.product',
     'api.payment',
     'api.user',
+    'api.Order',
 ]
 
 
@@ -55,7 +56,7 @@ CORS_ORIGIN_WHITELIST =(
     'http://localhost:3000'
 )
 
-Auth_USER_MODEL = "api.user.CustomUser"
+AUTH_USER_MODEL = "user.CustomUser"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':[
@@ -110,6 +111,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 
 
 # Password validation
